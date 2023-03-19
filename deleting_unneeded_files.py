@@ -26,12 +26,14 @@ def find_size(user_dir):
         if dir_size >= size_limit:
             large_dirs.append(dir_name)
 
-    if large_dirs is not None:
+    if large_dirs:
         ld = ", ".join(large_dirs)
         print(f"The following folders exceed the size limit: {ld}")
         print("Please examine their contents.")
+    else:
+        print("Nothing above size limit found.")
 
-    if large_files is not None:
+    if large_files:
         for lf in large_files:
             print(f"{lf} exceeds size limit.")
             del_confirm = input(
