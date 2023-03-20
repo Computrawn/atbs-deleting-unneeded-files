@@ -1,0 +1,4 @@
+Problems for future me:
+* Figure out how to calculate acurate file size by adding file size sums from subfolders.
+* Make a pretty UI.
+* Try to convert to a class data structure, maybe?
