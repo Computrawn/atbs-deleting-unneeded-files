@@ -3,3 +3,5 @@
 *.pyc
 .idea
 venv
+credentials*.json
+logging.txt
