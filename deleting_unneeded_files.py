@@ -1,9 +1,17 @@
-#! python3
-"""deleting_unneeded_files.py — An exercise in organizing files.
-For more information, see enclosed project_details.txt file."""
+#!/usr/bin/env python3
+# deleting_unneeded_files.py — An exercise in organizing files.
+# For more information, see README.md
 
+import logging
 import os
 import send2trash
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    filename="logging.txt",
+    format="%(asctime)s -  %(levelname)s -  %(message)s",
+)
+logging.disable(logging.CRITICAL)  # Note out to enable logging.
 
 large_files = []
 large_dirs = []
@@ -46,4 +54,9 @@ def find_size(user_dir):
                 print("File will remain in directory.")
 
 
-find_size(dir_path)
+def main():
+    find_size(dir_path)
+
+
+if __name__ == "__main__":
+    main()
