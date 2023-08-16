@@ -4,7 +4,7 @@
 
 import logging
 import os
-import send2trash
+from pathlib import Path
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -14,11 +14,17 @@ logging.basicConfig(
 # logging.disable(logging.CRITICAL)  # Note out to enable logging.
 
 
-def find_size(directory):
-    """Finds large file sizes and directories. If the directory exceeds limit, user is prompted
-    to examine its contents."""
+def validate_path() -> Path:
+    user_path = Path.home() / input("Please type path to directory here: ")
+    if not user_path.is_dir():
+        print("Directory does not exist.")
+        exit()
+    return user_path
+
+
+def find_large_files(directory):
+    """Finds large file sizes in specified directory."""
     large_files = []
-    large_dirs = []
     user_size = input("Please type file size limit in megabytes: ")
     bytes_size = int(user_size) * 1000000
     for directory, _, filenames in os.walk(directory):
@@ -29,16 +35,7 @@ def find_size(directory):
             directory_size += file_size
             if file_size >= bytes_size:
                 large_files.append(f"{file_path}")
-        if directory_size >= bytes_size:
-            large_dirs.append(directory)
 
-    if large_dirs:
-        ld = ", ".join(large_dirs)
-        print(f"The following folders exceed the size limit: {ld}")
-        # print(f"The following files are larger than {size_limit}: {large_files}")
-        print("Please examine their contents.")
-    else:
-        print(f"Nothing above {user_size} megabytes found.")
     print(f"The following files exceed the limit of {user_size} MB:")
     for filename in large_files:
         filename = filename.split("/")
@@ -46,7 +43,8 @@ def find_size(directory):
 
 
 def main():
-    find_size(input("Please type path to directory here: "))
+    valid_path = validate_path()
+    find_large_files(valid_path)
 
 
 if __name__ == "__main__":
