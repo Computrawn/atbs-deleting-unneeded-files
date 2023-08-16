@@ -40,10 +40,10 @@ def detect_large_files(directory: Path, size: int) -> list[Path]:
 
     for directory, _, filenames in os.walk(directory):
         for filename in filenames:
-            file_path = f"{directory}/{filename}"
-            file_size = os.path.getsize(file_path)
+            file_path = Path(f"{directory}/{filename}")
+            file_size = file_path.stat().st_size
             if file_size >= size:
-                large_files.append(Path(file_path))
+                large_files.append(file_path)
     sorted_files = sorted(large_files)
 
     if sorted_files:
@@ -59,8 +59,8 @@ def detect_large_files(directory: Path, size: int) -> list[Path]:
 def main():
     """Main sequence."""
     valid_path = validate_path()
-    max_file_size = get_file_size_limit()
-    detect_large_files(valid_path, max_file_size)
+    file_size_limit = get_file_size_limit()
+    detect_large_files(valid_path, file_size_limit)
 
 
 if __name__ == "__main__":
