@@ -43,17 +43,6 @@ def find_size(directory):
     for filename in large_files:
         filename = filename.split("/")
         print(f"* {filename[-1]}")
-    # if large_files:
-    #     for lf in large_files:
-    #         print(f"{lf} exceeds size limit.")
-    #         del_confirm = input(
-    #             "Type del to send it to the trash or keep to retain file. "
-    #         )
-    #         if del_confirm.lower() == "del":
-    #             print(f"\nSending {lf} to trash.\n")
-    #             send2trash.send2trash(lf)
-    #         else:
-    #             print("File will remain in directory.")
 
 
 def main():
