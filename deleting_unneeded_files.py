@@ -11,7 +11,7 @@ logging.basicConfig(
     filename="logging.txt",
     format="%(asctime)s -  %(levelname)s -  %(message)s",
 )
-logging.disable(logging.CRITICAL)  # Note out to enable logging.
+# logging.disable(logging.CRITICAL)  # Note out to enable logging.
 
 
 def find_size(directory):
